@@ -2,9 +2,8 @@ package com.hirantha.invoice.processor;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.hirantha.invoice.data.CommonTestData;
 import com.hirantha.invoice.dto.UserDto;
-import com.hirantha.invoice.enums.UserType;
-import java.time.LocalDate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -27,7 +26,7 @@ public class DiscountChainTest {
 
   @Test
   public void testGetDiscount_forEmployee() {
-    UserDto user = getEmployee();
+    UserDto user = CommonTestData.getEmployee();
     double discountPercentage = discountChain.getDiscount(user);
 
     assertEquals(30.0, discountPercentage);
@@ -35,7 +34,7 @@ public class DiscountChainTest {
 
   @Test
   public void testGetDiscount_forAffiliate() {
-    UserDto user = getAffiliate();
+    UserDto user = CommonTestData.getAffiliate();
     double discountPercentage = discountChain.getDiscount(user);
 
     assertEquals(10.0, discountPercentage);
@@ -43,7 +42,7 @@ public class DiscountChainTest {
 
   @Test
   public void testGetDiscount_forOldCustomer() {
-    UserDto user = getOldCustomer();
+    UserDto user = CommonTestData.getOldCustomer();
     double discountPercentage = discountChain.getDiscount(user);
 
     assertEquals(5.0, discountPercentage);
@@ -51,46 +50,10 @@ public class DiscountChainTest {
 
   @Test
   public void testGetDiscount_forNewCustomer() {
-    UserDto user = getNewCustomer();
+    UserDto user = CommonTestData.getNewCustomer();
     double discountPercentage = discountChain.getDiscount(user);
 
     assertEquals(0.0, discountPercentage);
-  }
-
-  private UserDto getEmployee() {
-    UserDto user = new UserDto();
-    user.setName("Employee");
-    user.setType(UserType.EMPLOYEE);
-    user.setRegisteredDate(LocalDate.now().minusYears(1));
-
-    return user;
-  }
-
-  private UserDto getAffiliate() {
-    UserDto user = new UserDto();
-    user.setName("Affiliate");
-    user.setType(UserType.AFFILIATE);
-    user.setRegisteredDate(LocalDate.now().minusYears(1));
-
-    return user;
-  }
-
-  private UserDto getNewCustomer() {
-    UserDto user = new UserDto();
-    user.setName("New Customer");
-    user.setType(UserType.CUSTOMER);
-    user.setRegisteredDate(LocalDate.now().minusYears(1));
-
-    return user;
-  }
-
-  private UserDto getOldCustomer() {
-    UserDto user = new UserDto();
-    user.setName("OLD Customer");
-    user.setType(UserType.CUSTOMER);
-    user.setRegisteredDate(LocalDate.now().minusYears(3));
-
-    return user;
   }
 
 }

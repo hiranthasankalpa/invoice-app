@@ -3,14 +3,11 @@ package com.hirantha.invoice.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
+import com.hirantha.invoice.data.CommonTestData;
 import com.hirantha.invoice.dto.InvoiceDto;
 import com.hirantha.invoice.dto.ItemDto;
-import com.hirantha.invoice.dto.UserDto;
-import com.hirantha.invoice.enums.UserType;
 import com.hirantha.invoice.processor.DiscountChain;
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,8 +36,8 @@ public class InvoiceServiceTest {
   @Test
   public void testGenerateInvoice_withOnlyGrocery_forAffiliateUser() {
     InvoiceDto invoice = new InvoiceDto();
-    invoice.setUser(getAffiliate());
-    invoice.setItems(getGroceryItems());
+    invoice.setUser(CommonTestData.getAffiliate());
+    invoice.setItems(CommonTestData.getGroceryItems());
 
     when(discountChain.getDiscount(invoice.getUser())).thenReturn(10.0);
 
@@ -53,8 +50,8 @@ public class InvoiceServiceTest {
   @Test
   public void testGenerateInvoice_withOnlyNonGroceryBelow100_forAffiliateUser() {
     InvoiceDto invoice = new InvoiceDto();
-    invoice.setUser(getAffiliate());
-    invoice.setItems(getNonGroceryItemsBelow100());
+    invoice.setUser(CommonTestData.getAffiliate());
+    invoice.setItems(CommonTestData.getNonGroceryItemsBelow100());
 
     when(discountChain.getDiscount(invoice.getUser())).thenReturn(10.0);
 
@@ -67,8 +64,8 @@ public class InvoiceServiceTest {
   @Test
   public void testGenerateInvoice_withOnlyNonGroceryAbove100_forAffiliateUser() {
     InvoiceDto invoice = new InvoiceDto();
-    invoice.setUser(getAffiliate());
-    invoice.setItems(getNonGroceryItemsAbove100());
+    invoice.setUser(CommonTestData.getAffiliate());
+    invoice.setItems(CommonTestData.getNonGroceryItemsAbove100());
 
     when(discountChain.getDiscount(invoice.getUser())).thenReturn(10.0);
 
@@ -81,10 +78,10 @@ public class InvoiceServiceTest {
   @Test
   public void testGenerateInvoice_withGroceryAndNonGroceryBelow100_forAffiliateUser() {
     InvoiceDto invoice = new InvoiceDto();
-    invoice.setUser(getAffiliate());
+    invoice.setUser(CommonTestData.getAffiliate());
 
-    List<ItemDto> items = getGroceryItems();
-    items.addAll(getNonGroceryItemsBelow100());
+    List<ItemDto> items = CommonTestData.getGroceryItems();
+    items.addAll(CommonTestData.getNonGroceryItemsBelow100());
     invoice.setItems(items);
 
     when(discountChain.getDiscount(invoice.getUser())).thenReturn(10.0);
@@ -98,10 +95,10 @@ public class InvoiceServiceTest {
   @Test
   public void testGenerateInvoice_withGroceryAndNonGroceryAbove100_forAffiliateUser() {
     InvoiceDto invoice = new InvoiceDto();
-    invoice.setUser(getAffiliate());
+    invoice.setUser(CommonTestData.getAffiliate());
 
-    List<ItemDto> items = getGroceryItems();
-    items.addAll(getNonGroceryItemsAbove100());
+    List<ItemDto> items = CommonTestData.getGroceryItems();
+    items.addAll(CommonTestData.getNonGroceryItemsAbove100());
     invoice.setItems(items);
 
     when(discountChain.getDiscount(invoice.getUser())).thenReturn(10.0);
@@ -115,10 +112,10 @@ public class InvoiceServiceTest {
   @Test
   public void testGenerateInvoice_withGroceryAndNonGroceryAbove100_forEmployeeUser() {
     InvoiceDto invoice = new InvoiceDto();
-    invoice.setUser(getEmployee());
+    invoice.setUser(CommonTestData.getEmployee());
 
-    List<ItemDto> items = getGroceryItems();
-    items.addAll(getNonGroceryItemsAbove100());
+    List<ItemDto> items = CommonTestData.getGroceryItems();
+    items.addAll(CommonTestData.getNonGroceryItemsAbove100());
     invoice.setItems(items);
 
     when(discountChain.getDiscount(invoice.getUser())).thenReturn(30.0);
@@ -132,10 +129,10 @@ public class InvoiceServiceTest {
   @Test
   public void testGenerateInvoice_withGroceryAndNonGroceryAbove100_forNewCustomer() {
     InvoiceDto invoice = new InvoiceDto();
-    invoice.setUser(getNewCustomer());
+    invoice.setUser(CommonTestData.getNewCustomer());
 
-    List<ItemDto> items = getGroceryItems();
-    items.addAll(getNonGroceryItemsAbove100());
+    List<ItemDto> items = CommonTestData.getGroceryItems();
+    items.addAll(CommonTestData.getNonGroceryItemsAbove100());
     invoice.setItems(items);
 
     when(discountChain.getDiscount(invoice.getUser())).thenReturn(0.0);
@@ -149,10 +146,10 @@ public class InvoiceServiceTest {
   @Test
   public void testGenerateInvoice_withGroceryAndNonGroceryAbove100_forOldCustomer() {
     InvoiceDto invoice = new InvoiceDto();
-    invoice.setUser(getOldCustomer());
+    invoice.setUser(CommonTestData.getOldCustomer());
 
-    List<ItemDto> items = getGroceryItems();
-    items.addAll(getNonGroceryItemsAbove100());
+    List<ItemDto> items = CommonTestData.getGroceryItems();
+    items.addAll(CommonTestData.getNonGroceryItemsAbove100());
     invoice.setItems(items);
 
     when(discountChain.getDiscount(invoice.getUser())).thenReturn(5.0);
@@ -161,99 +158,6 @@ public class InvoiceServiceTest {
 
     assertEquals(new BigDecimal("550.00"), generatedInvoice.getSubTotal());
     assertEquals(new BigDecimal("535.00"), generatedInvoice.getNetAmount());
-  }
-
-  private UserDto getEmployee() {
-    UserDto user = new UserDto();
-    user.setName("Employee");
-    user.setType(UserType.EMPLOYEE);
-    user.setRegisteredDate(LocalDate.now().minusYears(1));
-
-    return user;
-  }
-
-  private UserDto getAffiliate() {
-    UserDto user = new UserDto();
-    user.setName("Affiliate");
-    user.setType(UserType.AFFILIATE);
-    user.setRegisteredDate(LocalDate.now().minusYears(1));
-
-    return user;
-  }
-
-  private UserDto getNewCustomer() {
-    UserDto user = new UserDto();
-    user.setName("New Customer");
-    user.setType(UserType.CUSTOMER);
-    user.setRegisteredDate(LocalDate.now().minusYears(1));
-
-    return user;
-  }
-
-  private UserDto getOldCustomer() {
-    UserDto user = new UserDto();
-    user.setName("OLD Customer");
-    user.setType(UserType.CUSTOMER);
-    user.setRegisteredDate(LocalDate.now().minusYears(3));
-
-    return user;
-  }
-
-  private List<ItemDto> getGroceryItems() {
-    List<ItemDto> items = new ArrayList<>();
-
-    ItemDto item1 = new ItemDto();
-    item1.setName("Grocery 1");
-    item1.setPrice(new BigDecimal("80.00"));
-    item1.setGrocery(true);
-
-    ItemDto item2 = new ItemDto();
-    item1.setName("Grocery 2");
-    item2.setPrice(new BigDecimal("130.00"));
-    item2.setGrocery(true);
-
-    items.add(item1);
-    items.add(item2);
-
-    return items;
-  }
-
-  private List<ItemDto> getNonGroceryItemsBelow100() {
-    List<ItemDto> items = new ArrayList<>();
-
-    ItemDto item1 = new ItemDto();
-    item1.setName("Non Grocery Small 1");
-    item1.setPrice(new BigDecimal("10.00"));
-    item1.setGrocery(false);
-
-    ItemDto item2 = new ItemDto();
-    item1.setName("Non Grocery Small 2");
-    item2.setPrice(new BigDecimal("20.00"));
-    item2.setGrocery(false);
-
-    items.add(item1);
-    items.add(item2);
-
-    return items;
-  }
-
-  private List<ItemDto> getNonGroceryItemsAbove100() {
-    List<ItemDto> items = new ArrayList<>();
-
-    ItemDto item1 = new ItemDto();
-    item1.setName("Non Grocery Big 1");
-    item1.setPrice(new BigDecimal("110.00"));
-    item1.setGrocery(false);
-
-    ItemDto item2 = new ItemDto();
-    item1.setName("Non Grocery Big 2");
-    item2.setPrice(new BigDecimal("230.00"));
-    item2.setGrocery(false);
-
-    items.add(item1);
-    items.add(item2);
-
-    return items;
   }
 
 }
