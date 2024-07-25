@@ -1,4 +1,4 @@
-package com.hirantha.invoice.processor.impl;
+package com.hirantha.invoice.processor.chain;
 
 import com.hirantha.invoice.enums.UserType;
 import com.hirantha.invoice.processor.Discount;

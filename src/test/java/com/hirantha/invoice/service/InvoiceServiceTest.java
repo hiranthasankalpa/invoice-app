@@ -7,18 +7,15 @@ import com.hirantha.invoice.data.CommonTestData;
 import com.hirantha.invoice.dto.InvoiceDto;
 import com.hirantha.invoice.dto.ItemDto;
 import com.hirantha.invoice.processor.DiscountChain;
-import java.math.BigDecimal;
-import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import java.math.BigDecimal;
+import java.util.List;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class InvoiceServiceTest {
 
@@ -34,7 +31,7 @@ public class InvoiceServiceTest {
   }
 
   @Test
-  public void testGenerateInvoice_withOnlyGrocery_forAffiliateUser() {
+  void testGenerateInvoice_withOnlyGrocery_forAffiliateUser() {
     InvoiceDto invoice = new InvoiceDto();
     invoice.setUser(CommonTestData.getAffiliate());
     invoice.setItems(CommonTestData.getGroceryItems());
@@ -48,7 +45,7 @@ public class InvoiceServiceTest {
   }
 
   @Test
-  public void testGenerateInvoice_withOnlyNonGroceryBelow100_forAffiliateUser() {
+  void testGenerateInvoice_withOnlyNonGroceryBelow100_forAffiliateUser() {
     InvoiceDto invoice = new InvoiceDto();
     invoice.setUser(CommonTestData.getAffiliate());
     invoice.setItems(CommonTestData.getNonGroceryItemsBelow100());
@@ -62,7 +59,7 @@ public class InvoiceServiceTest {
   }
 
   @Test
-  public void testGenerateInvoice_withOnlyNonGroceryAbove100_forAffiliateUser() {
+  void testGenerateInvoice_withOnlyNonGroceryAbove100_forAffiliateUser() {
     InvoiceDto invoice = new InvoiceDto();
     invoice.setUser(CommonTestData.getAffiliate());
     invoice.setItems(CommonTestData.getNonGroceryItemsAbove100());
@@ -76,7 +73,7 @@ public class InvoiceServiceTest {
   }
 
   @Test
-  public void testGenerateInvoice_withGroceryAndNonGroceryBelow100_forAffiliateUser() {
+  void testGenerateInvoice_withGroceryAndNonGroceryBelow100_forAffiliateUser() {
     InvoiceDto invoice = new InvoiceDto();
     invoice.setUser(CommonTestData.getAffiliate());
 
@@ -93,7 +90,7 @@ public class InvoiceServiceTest {
   }
 
   @Test
-  public void testGenerateInvoice_withGroceryAndNonGroceryAbove100_forAffiliateUser() {
+  void testGenerateInvoice_withGroceryAndNonGroceryAbove100_forAffiliateUser() {
     InvoiceDto invoice = new InvoiceDto();
     invoice.setUser(CommonTestData.getAffiliate());
 
@@ -110,7 +107,7 @@ public class InvoiceServiceTest {
   }
 
   @Test
-  public void testGenerateInvoice_withGroceryAndNonGroceryAbove100_forEmployeeUser() {
+  void testGenerateInvoice_withGroceryAndNonGroceryAbove100_forEmployeeUser() {
     InvoiceDto invoice = new InvoiceDto();
     invoice.setUser(CommonTestData.getEmployee());
 
@@ -127,7 +124,7 @@ public class InvoiceServiceTest {
   }
 
   @Test
-  public void testGenerateInvoice_withGroceryAndNonGroceryAbove100_forNewCustomer() {
+  void testGenerateInvoice_withGroceryAndNonGroceryAbove100_forNewCustomer() {
     InvoiceDto invoice = new InvoiceDto();
     invoice.setUser(CommonTestData.getNewCustomer());
 
@@ -144,7 +141,7 @@ public class InvoiceServiceTest {
   }
 
   @Test
-  public void testGenerateInvoice_withGroceryAndNonGroceryAbove100_forOldCustomer() {
+  void testGenerateInvoice_withGroceryAndNonGroceryAbove100_forOldCustomer() {
     InvoiceDto invoice = new InvoiceDto();
     invoice.setUser(CommonTestData.getOldCustomer());
 

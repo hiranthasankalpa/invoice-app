@@ -16,6 +16,8 @@
 
 	<properties>
 		<java.version>21</java.version>
+		<springdoc.version>2.5.0</springdoc.version>
+		<junit.version>4.13.1</junit.version>
 	</properties>
 
 	<dependencies>
@@ -41,7 +43,7 @@
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-			<version>2.5.0</version>
+			<version>${springdoc.version}</version>
 		</dependency>
 
 		<dependency>
@@ -52,8 +54,13 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.13.1</version>
-			<scope>test</scope>
+			<version>${junit.version}</version>
+			<scope>test</scope><exclusions>
+			<exclusion>
+				<artifactId>junit-vintage-engine</artifactId>
+				<groupId>org.junit.vintage</groupId>
+			</exclusion>
+		</exclusions>
 		</dependency>
 
 	</dependencies>

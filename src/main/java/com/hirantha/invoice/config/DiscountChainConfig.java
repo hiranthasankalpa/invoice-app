@@ -1,10 +1,10 @@
 package com.hirantha.invoice.config;
 
 import com.hirantha.invoice.processor.DiscountChain;
-import com.hirantha.invoice.processor.impl.AffiliateDiscount;
-import com.hirantha.invoice.processor.impl.CustomerDiscount;
+import com.hirantha.invoice.processor.chain.AffiliateDiscount;
+import com.hirantha.invoice.processor.chain.CustomerDiscount;
+import com.hirantha.invoice.processor.chain.EmployeeDiscount;
 import com.hirantha.invoice.processor.impl.DiscountChainImpl;
-import com.hirantha.invoice.processor.impl.EmployeeDiscount;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

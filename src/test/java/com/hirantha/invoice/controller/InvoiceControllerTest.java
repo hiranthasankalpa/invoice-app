@@ -31,16 +31,16 @@ import org.springframework.test.web.servlet.MockMvc;
 public class InvoiceControllerTest {
 
   @Autowired
-  private MockMvc mockMvc;
+  MockMvc mockMvc;
 
   @MockBean
-  private InvoiceService invoiceService;
+  InvoiceService invoiceService;
 
   @Autowired
-  private ObjectMapper objectMapper;
+  ObjectMapper objectMapper;
 
   @Test
-  public void shouldReturnOk() throws Exception {
+  void shouldReturnOk() throws Exception {
     InvoiceDto request = new InvoiceDto();
     request.setUser(CommonTestData.getAffiliate());
     request.setItems(CommonTestData.getNonGroceryItemsAbove100());
@@ -65,7 +65,7 @@ public class InvoiceControllerTest {
   }
 
   @Test
-  public void shouldReturnValidationErrorUserName() throws Exception {
+  void shouldReturnValidationErrorUserName() throws Exception {
     InvoiceDto request = new InvoiceDto();
 
     UserDto user = new UserDto();
@@ -89,7 +89,7 @@ public class InvoiceControllerTest {
   }
 
   @Test
-  public void shouldReturnValidationErrorUserRegisteredDate() throws Exception {
+  void shouldReturnValidationErrorUserRegisteredDate() throws Exception {
     InvoiceDto request = new InvoiceDto();
 
     UserDto user = new UserDto();
@@ -113,7 +113,7 @@ public class InvoiceControllerTest {
   }
 
   @Test
-  public void shouldReturnValidationErrorUserType() throws Exception {
+  void shouldReturnValidationErrorUserType() throws Exception {
     InvoiceDto request = new InvoiceDto();
 
     UserDto user = new UserDto();
@@ -137,7 +137,7 @@ public class InvoiceControllerTest {
   }
 
   @Test
-  public void shouldReturnValidationErrorItemName() throws Exception {
+  void shouldReturnValidationErrorItemName() throws Exception {
     InvoiceDto request = new InvoiceDto();
     request.setUser(CommonTestData.getAffiliate());
 
@@ -161,7 +161,7 @@ public class InvoiceControllerTest {
   }
 
   @Test
-  public void shouldReturnValidationErrorItemPriceNull() throws Exception {
+  void shouldReturnValidationErrorItemPriceNull() throws Exception {
     InvoiceDto request = new InvoiceDto();
     request.setUser(CommonTestData.getAffiliate());
 
@@ -185,7 +185,7 @@ public class InvoiceControllerTest {
   }
 
   @Test
-  public void shouldReturnValidationErrorItemPriceZero() throws Exception {
+  void shouldReturnValidationErrorItemPriceZero() throws Exception {
     InvoiceDto request = new InvoiceDto();
     request.setUser(CommonTestData.getAffiliate());
 
@@ -210,7 +210,7 @@ public class InvoiceControllerTest {
   }
 
   @Test
-  public void shouldReturnValidationErrorItemPriceNegative() throws Exception {
+  void shouldReturnValidationErrorItemPriceNegative() throws Exception {
     InvoiceDto request = new InvoiceDto();
     request.setUser(CommonTestData.getAffiliate());
 
@@ -235,7 +235,7 @@ public class InvoiceControllerTest {
   }
 
   @Test
-  public void shouldReturnValidationErrorUserNull() throws Exception {
+  void shouldReturnValidationErrorUserNull() throws Exception {
     InvoiceDto request = new InvoiceDto();
     request.setItems(CommonTestData.getNonGroceryItemsAbove100());
 
@@ -253,7 +253,7 @@ public class InvoiceControllerTest {
   }
 
   @Test
-  public void shouldReturnValidationErrorItemsNull() throws Exception {
+  void shouldReturnValidationErrorItemsNull() throws Exception {
     InvoiceDto request = new InvoiceDto();
     request.setUser(CommonTestData.getAffiliate());
 
@@ -271,7 +271,7 @@ public class InvoiceControllerTest {
   }
 
   @Test
-  public void shouldReturnValidationErrorItemsEmpty() throws Exception {
+  void shouldReturnValidationErrorItemsEmpty() throws Exception {
     InvoiceDto request = new InvoiceDto();
     request.setUser(CommonTestData.getAffiliate());
 

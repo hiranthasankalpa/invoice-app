@@ -30,13 +30,13 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     invoice.setSubTotal(nonGroceryTotal.add(groceryTotal));
 
-    BigDecimal discountApplicableHundredth = nonGroceryTotal.divide(new BigDecimal(100), 0,
+    BigDecimal discountApplicableHundredth = nonGroceryTotal.divide(BigDecimal.valueOf(100), 0,
         RoundingMode.DOWN);
 
-    if (discountApplicableHundredth.compareTo(new BigDecimal(0)) > 0) {
+    if (discountApplicableHundredth.compareTo(BigDecimal.valueOf(0)) > 0) {
       double discountPercentage = discountChain.getDiscount(invoice.getUser());
       BigDecimal discountAmount = discountApplicableHundredth.multiply(
-          new BigDecimal(discountPercentage));
+          BigDecimal.valueOf(discountPercentage));
       nonGroceryTotal = nonGroceryTotal.subtract(discountAmount);
     }
 

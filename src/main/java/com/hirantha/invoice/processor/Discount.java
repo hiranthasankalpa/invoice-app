@@ -3,9 +3,11 @@ package com.hirantha.invoice.processor;
 import com.hirantha.invoice.dto.UserDto;
 import com.hirantha.invoice.enums.UserType;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 public abstract class Discount implements Comparable<Discount> {
 
