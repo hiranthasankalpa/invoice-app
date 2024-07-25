@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @SpringBootTest
-public class InvoiceServiceTest {
+class InvoiceServiceTest {
 
   @Mock
   private DiscountChain discountChain;

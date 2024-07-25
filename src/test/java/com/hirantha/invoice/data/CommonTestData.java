@@ -10,7 +10,6 @@ import java.util.List;
 
 public class CommonTestData {
 
-
   public static UserDto getEmployee() {
     UserDto user = new UserDto();
     user.setName("Employee");

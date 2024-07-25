@@ -28,7 +28,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class InvoiceControllerTest {
+class InvoiceControllerTest {
 
   @Autowired
   MockMvc mockMvc;
